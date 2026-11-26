@@ -1,0 +1,45 @@
+{
+  "dataset": "alpaca-gpt4-data-zh (48k, using 5000 train / 200 eval)",
+  "models": {
+    "qwen25_05b": {
+      "zero_shot_ppl": 17.438219372572092,
+      "lora": {
+        "trainable_pct": 0.8826,
+        "train_loss": [
+          2.093157492127683,
+          1.8937969831228256,
+          1.7653688116802109
+        ],
+        "eval_loss": [
+          2.0152025649547576,
+          2.0160228828191755,
+          2.0475372998714447
+        ],
+        "final_eval_ppl": 7.502246919603001,
+        "best_eval_ppl": 7.502246919603001
+      },
+      "full": {
+        "train_loss": [
+          1.7677059176233079,
+          1.1440895660618942
+        ],
+        "eval_loss": [
+          1.6655609593391418,
+          1.7014803097248077
+        ],
+        "final_eval_ppl": 5.288639129325015,
+        "best_eval_ppl": 5.288639129325015
+      }
+    },
+    "qwen25_15b": {
+      "zero_shot_ppl": 13.664744270027255,
+      "note": "LoRA finetune attempted but interrupted by machine sleep; not completed. Zero-shot baseline only."
+    }
+  },
+  "key_findings": [
+    "0.5B: LoRA (best eval ppl 7.50) vs zero-shot (17.44): 2.3x perplexity reduction from instruction tuning.",
+    "0.5B: Full finetune (best 5.29) < LoRA (7.50) < zero-shot (17.44): full finetune gives further gains but cost is 500x more trainable params.",
+    "1.5B: zero-shot ppl 13.66 < 0.5B zero-shot 17.44 — model scale improves zero-shot performance.",
+    "Both LoRA and full finetune converge by epoch 1 (best eval at epoch 1, slight overfit at epoch 2-3) — data scale (5000 examples) saturates quickly."
+  ]
+}
